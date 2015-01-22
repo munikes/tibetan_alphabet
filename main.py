@@ -2,18 +2,27 @@ from random import shuffle
 from unicodedata import lookup
 from Tkinter import *
 from pygame import mixer
+from tkSnack import *
 
 letras = {lookup("tibetan letter ka"):("ka", "sound/ka.mp3"), 
           lookup("tibetan letter kha"):("k'a", "sound/kha.mp3"),
-          lookup("tibetan letter ga"):("k'a", "sound/kh_a.mp3"),
+          lookup("tibetan letter ga"):("k_'a", "sound/kh_a.mp3"),
           lookup("tibetan letter nga"):("nga", "sound/nga.mp3")}
 
+# return random keys 
+def shuffle_dictionary (dictionary):
+    # Python 3 
+    # keys =  list(dictionary.keys())
+    # Python 2 
+    keys = dictionary.keys()
+    shuffle(keys)
+    return keys
+        
 def generate_question(list_questions):
-    shuffle(list_questions)
     right_answer = list_questions[0]
-    wrong_answers = [list_questions[1],list_questions[2],
-                     list_questions[3]]
-    return right_answer, wrong_answers
+    answers = list_questions[0:4]
+    shuffle(answers)
+    return right_answer, answers
 
 def play_ogg():
     mixer.init()
@@ -23,18 +32,24 @@ def play_ogg():
 #print letras["ka"][0] # letra tibetana (importante poner el print)
 #letras["ka"][1] # fichero de sonido
 
+# random the letters
+keys = shuffle_dictionary(letras)
+right_answer, answers = generate_question(keys)
 ventana = Tk()
-ventana.geometry("650x560+100+80")
-label = Label(ventana, text = letras['ka'][0], font=("", 80))
+initializeSnack(ventana)
+ventana.geometry("185x260+100+80")
+label = Label(ventana, text = right_answer, font=("", 80))
 label.pack()
-#play_sound=Button(ventana,width=50,height=50,fg='black',
-#            bitmap='snackPlay', command=play_ogg).place(x=115,y=501)
-option_1 = Button(ventana,width=50,height=50,fg='red', 
-                  bitmap='snackRecord').place(x=5,y=501) 
-option_2 = Button(ventana,width=50,height=50,fg='black', 
-            bitmap='snackStop').place(x=60,y=501) 
-option_3 = Button(ventana,width=50,height=50,fg='black', 
-                bitmap='snackPlay', command=play_ogg).place(x=115,y=501) 
-option_4 = Button(ventana,width=5,height=3,fg='black', 
-                text='Save').place(x=170,y=501) 
+
+play_sound=Button(ventana,width=40,height=30,fg='black',
+            bitmap='snackPlay', command=play_ogg).place(x=5,y=102)
+option_1 = Button(ventana,width=7,height=3,fg='black', 
+                  text=letras[answers[0]][0]).place(x=5,y=140) 
+option_2 = Button(ventana,width=7,height=3,fg='black', 
+                  text=letras[answers[1]][0]).place(x=5,y=200) 
+option_3 = Button(ventana,width=7,height=3,fg='black', 
+                  text=letras[answers[2]][0]).place(x=95,y=140)
+option_4 = Button(ventana,width=7,height=3,fg='black', 
+                  text=letras[answers[3]][0]).place(x=95,y=200)
+
 ventana.mainloop()
