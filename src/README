@@ -1,37 +1,51 @@
-# Copyright (C) 2011 Diego Pardilla Mata
+#    Copyright (C) 2015 mUniKeS
 #
-# This file is part of SpiderBOY.
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
-# SpiderBOY is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
 #
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program. If not, see <http://www.gnu.org/licenses/>.
-This is the SpiderBoy crawler.
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>
+
+This is a quiz to learn tibetan.
+
 It has (among others) the following major features
-Search URL's from another URL and with a depth indicated
+
+    Learn the tibetan letters
+    Vocabulary
+    Pronunciation
+
 Installation:
-See INSTALL file for information on how to install SpiderBOY
-Starting SpiderBOY:
-run from the command line: `spiderboy.py [-h] [-n NUMBER_OF_LEVELS] [url]'
-run `spiderboy.py -h' for more startup options
+
+    See INSTALL file for information on how to install Learn-Tibetan
+
+Starting Learn-Tibetan:
+
+    XXXXXXXX TO-DO XXXXXXXXXXXXX
+
 More information:
-http://code.sidelab.es/projects/diegopardilla/wiki
+
+    https://budismoclasico.wordpress.com/tibetano/
+
 Written by:
-see AUTHORS for more information
+
+    see AUTHORS for more information
+
 Reporting Bugs:
-Please report bugs to our mailing list or our bugtracker:
-munikes@members.fsf.org
-pardilla@members.fsf.org
-http://code.sidelab.es/projects/diegopardilla/issues/new
+
+    Please report bugs to our mailing list or our bugtracker:
+        munikes@members.fsf.org
+        pardilla@members.fsf.org
+        XXXXXXX TO-DO a Bugtracker XXXXXXXXXXXX
+
 Contacting us:
-http://packages.python.org/SpiderBOY (homepage)
-munikes@members.fsf.org (mUniKeS)
-pardilla@members.fsf.org (Diego Pardilla)
+
+    https://pythonhosted.org/Learn-Tibetan/ (homepage TODO)
+    munikes@members.fsf.org (mUniKeS)
+    pardilla@members.fsf.org (Diego Pardilla)
