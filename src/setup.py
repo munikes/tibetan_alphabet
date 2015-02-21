@@ -20,7 +20,7 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup (name = "Learn-Tibetan",
-       version = "0.1",
+       version = "0.0.1.dev1",
        packages = find_packages(),
        scripts = ['main.py'],
        install_requires = ['pygame'],
