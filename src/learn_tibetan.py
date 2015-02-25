@@ -20,10 +20,11 @@ from Tkinter import Tk, Button, PhotoImage, Label, Frame
 import pygame
 
 TITLE = "Learn Tibetan"
+WINDOW_DIMENSIONS = "185x260+100+80"
 SOUNDS_PATH = os.path.join(os.path.dirname(__file__), "../sounds/")
 IMAGES_PATH = os.path.join(os.path.dirname(__file__), "../images/")
 
-LETTERS = {lookup("tibetan letter ka"):("ka", SOUNDS_PATH + "ka.ogg"), 
+LETTERS = {lookup("tibetan letter ka"):("ka", SOUNDS_PATH + "ka.ogg"),
           lookup("tibetan letter kha"):("k'a", SOUNDS_PATH + "kha.ogg"),
           lookup("tibetan letter ga"):("k_'a", SOUNDS_PATH + "kh_a.ogg"),
           lookup("tibetan letter nga"):("nga", SOUNDS_PATH + "nga.ogg")}
@@ -75,12 +76,12 @@ def play_ogg(list_oggs):
 
 
 class Application(Frame):
-    
+
     def __init__(self, parent):
-        
+
         Frame.__init__(self, parent)
         self.parent = parent
-        
+
         # generate the options of buttons
         keys = shuffle_dictionary(LETTERS)
         right_answer, answers = generate_letters(keys, NUM_LETTERS)
@@ -90,21 +91,21 @@ class Application(Frame):
         #self.create_button()
         self.create_play_button(answers)
         self.create_option_buttons(right_answer, answers)
-        
+
     def create_window (self):
-        
-        self.parent.geometry("185x260+100+80")
+
+        self.parent.geometry(WINDOW_DIMENSIONS)
         self.parent.title(TITLE)
 
     def create_letter(self, right_answer):
-        
+
         self.label = Label(self.parent, text=right_answer, font=("",80))
         self.label.pack()
-        
+
     def create_button(self):
-        
+
         self.button = Button().place(x=5,y=102)
-            
+
     def create_play_button(self, answers):
 
         # create list of oggs
@@ -112,12 +113,12 @@ class Application(Frame):
         i= 0
         for i in range(0, NUM_LETTERS):
             list_oggs.append(LETTERS[answers[i]][1])
-            i+=1        
+            i+=1
         self.play_image = PhotoImage(file=IMAGES_PATH + 'play.png')
         # create the button
         self.play_button = Button(self.parent,width=40,height=30,fg='black',
             image=self.play_image, command=lambda: play_ogg(list_oggs)).place(x=5,y=102)
-            
+
     def right_button(self, button):
         """
         Button right green and sound
@@ -135,47 +136,44 @@ class Application(Frame):
         button.config(activebackground="red")
         pygame.mixer.music.load(SOUNDS_PATH + 'wrong.ogg')
         pygame.mixer.music.play()
-    
+
     def create_option_buttons(self, right_answer, answers):
-                
+
         # create buttons
-        self.option_1 = Button(self.parent,width=7,height=3,fg='black', 
+        self.option_1 = Button(self.parent,width=7,height=3,fg='black',
                   text=LETTERS[answers[0]][0])
         self.option_1.place(x=5,y=140)
-        self.option_2 = Button(self.parent,width=7,height=3,fg='black', 
+        self.option_2 = Button(self.parent,width=7,height=3,fg='black',
                   text=LETTERS[answers[1]][0])
         self.option_2.place(x=5,y=200) 
-        self.option_3 = Button(self.parent,width=7,height=3,fg='black', 
+        self.option_3 = Button(self.parent,width=7,height=3,fg='black',
                   text=LETTERS[answers[2]][0])
         self.option_3.place(x=95,y=140)
-        self.option_4 = Button(self.parent,width=7,height=3,fg='black', 
+        self.option_4 = Button(self.parent,width=7,height=3,fg='black',
                   text=LETTERS[answers[3]][0])
         self.option_4.place(x=95,y=200)
         self.option_1.config(command=lambda:
-                             self.right_button(self.option_1) if answers[0] == right_answer 
+                             self.right_button(self.option_1) if answers[0] == right_answer
                              else self.wrong_button(self.option_1))
-        self.option_2.config(command=lambda: 
-                             self.parent.right_button(self.option_2) if answers[1] == right_answer 
+        self.option_2.config(command=lambda:
+                             self.parent.right_button(self.option_2) if answers[1] == right_answer
                              else self.wrong_button(self.option_2))
-        self.option_3.config(command=lambda: 
-                             self.right_button(self.option_3) if answers[2] == right_answer 
+        self.option_3.config(command=lambda:
+                             self.right_button(self.option_3) if answers[2] == right_answer
                              else self.wrong_button(self.option_3))
-        self.option_4.config(command=lambda: 
-                             self.right_button(self.option_4) if answers[3] == right_answer 
-                             else self.wrong_button(self.option_4))        
-
-
-
+        self.option_4.config(command=lambda:
+                             self.right_button(self.option_4) if answers[3] == right_answer
+                             else self.wrong_button(self.option_4))
 
 
 def main():
-  
+
     pygame.init()
     root = Tk()
     app = Application(root)
     root.mainloop()
-    pygame.quit()  
+    pygame.quit()
 
 
 if __name__ == '__main__':
-    main()  
+    main()
