@@ -16,7 +16,7 @@
 import os
 from random import shuffle
 from unicodedata import lookup
-from Tkinter import Tk, Button, PhotoImage, Label, Frame
+from Tkinter import Tk, Button, PhotoImage, Label, Frame, Toplevel
 import pygame
 
 TITLE = "Learn Tibetan"
@@ -30,6 +30,7 @@ LETTERS = {lookup("tibetan letter ka"):("ka", SOUNDS_PATH + "ka.ogg"),
           lookup("tibetan letter nga"):("nga", SOUNDS_PATH + "nga.ogg")}
 
 NUM_LETTERS = 4
+OPCIONES_MENU = ["Adivina las letras", "Adivina vocabulario", "Ayuda"]
 
 
 def shuffle_dictionary (dictionary):
@@ -75,7 +76,44 @@ def play_ogg(list_oggs):
             i+=1
 
 
-class Application(Frame):
+def open_window(window):
+    """
+    Open window
+    """
+    window.deiconify()
+
+
+def close_window(window):
+    """
+    Close window
+    """
+    window.withdraw()
+
+class Menu(Frame):
+
+    def __init__(self, parent, child):
+
+        Frame.__init__(self, parent)
+        self.parent = parent
+        # create window
+        self.create_window()
+        self.create_menu(child)
+
+    def create_window(self):
+
+        self.parent.geometry()
+        self.parent.title(TITLE)
+
+    def create_menu(self, child):
+
+        opciones = OPCIONES_MENU
+#         i=1
+#         for opcion in OPCIONES_MENU:
+#             self.button = Button(self.parent, text=opcion, width=20, anchor="center").grid(row=i)
+#             i+=1
+        self.button = Button(self.parent, text=opciones[1], width=20, anchor="center", command=lambda: open_window(child)).grid(row=1)
+
+class QuizLetter(Frame):
 
     def __init__(self, parent):
 
@@ -101,10 +139,6 @@ class Application(Frame):
 
         self.label = Label(self.parent, text=right_answer, font=("",80))
         self.label.pack()
-
-    def create_button(self):
-
-        self.button = Button().place(x=5,y=102)
 
     def create_play_button(self, answers):
 
@@ -156,7 +190,7 @@ class Application(Frame):
                              self.right_button(self.option_1) if answers[0] == right_answer
                              else self.wrong_button(self.option_1))
         self.option_2.config(command=lambda:
-                             self.parent.right_button(self.option_2) if answers[1] == right_answer
+                             self.right_button(self.option_2) if answers[1] == right_answer
                              else self.wrong_button(self.option_2))
         self.option_3.config(command=lambda:
                              self.right_button(self.option_3) if answers[2] == right_answer
@@ -170,7 +204,10 @@ def main():
 
     pygame.init()
     root = Tk()
-    app = Application(root)
+    win_option = Toplevel(root)
+    menu = Menu(root, win_option)
+    app = QuizLetter(win_option)
+    win_option.withdraw()
     root.mainloop()
     pygame.quit()
 
